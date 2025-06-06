@@ -3,10 +3,10 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i12;
+import 'dart:async' as _i13;
 
-import 'package:async/async.dart' as _i20;
-import 'package:chatwoot_sdk/chatwoot_callbacks.dart' as _i18;
+import 'package:async/async.dart' as _i21;
+import 'package:chatwoot_sdk/chatwoot_callbacks.dart' as _i19;
 import 'package:chatwoot_sdk/data/local/dao/chatwoot_contact_dao.dart' as _i4;
 import 'package:chatwoot_sdk/data/local/dao/chatwoot_conversation_dao.dart'
     as _i3;
@@ -14,13 +14,15 @@ import 'package:chatwoot_sdk/data/local/dao/chatwoot_messages_dao.dart' as _i5;
 import 'package:chatwoot_sdk/data/local/dao/chatwoot_user_dao.dart' as _i2;
 import 'package:chatwoot_sdk/data/local/entity/chatwoot_contact.dart' as _i6;
 import 'package:chatwoot_sdk/data/local/entity/chatwoot_conversation.dart'
-    as _i14;
+    as _i9;
 import 'package:chatwoot_sdk/data/local/entity/chatwoot_message.dart' as _i7;
-import 'package:chatwoot_sdk/data/local/local_storage.dart' as _i11;
+import 'package:chatwoot_sdk/data/local/local_storage.dart' as _i12;
 import 'package:chatwoot_sdk/data/remote/chatwoot_client_exception.dart'
-    as _i19;
+    as _i20;
 import 'package:chatwoot_sdk/data/remote/requests/chatwoot_action_data.dart'
     as _i17;
+import 'package:chatwoot_sdk/data/remote/requests/chatwoot_conversation_request.dart'
+    as _i18;
 import 'package:chatwoot_sdk/data/remote/requests/chatwoot_new_message_request.dart'
     as _i15;
 import 'package:chatwoot_sdk/data/remote/requests/send_csat_survey_request.dart'
@@ -28,10 +30,10 @@ import 'package:chatwoot_sdk/data/remote/requests/send_csat_survey_request.dart'
 import 'package:chatwoot_sdk/data/remote/responses/csat_survey_response.dart'
     as _i8;
 import 'package:chatwoot_sdk/data/remote/service/chatwoot_client_service.dart'
-    as _i13;
+    as _i14;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:stream_channel/stream_channel.dart' as _i10;
-import 'package:web_socket_channel/web_socket_channel.dart' as _i9;
+import 'package:stream_channel/stream_channel.dart' as _i11;
+import 'package:web_socket_channel/web_socket_channel.dart' as _i10;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -123,8 +125,9 @@ class _FakeCsatSurveyFeedbackResponse_6 extends _i1.SmartFake
         );
 }
 
-class _FakeWebSocketSink_7 extends _i1.SmartFake implements _i9.WebSocketSink {
-  _FakeWebSocketSink_7(
+class _FakeChatwootConversation_7 extends _i1.SmartFake
+    implements _i9.ChatwootConversation {
+  _FakeChatwootConversation_7(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -133,9 +136,19 @@ class _FakeWebSocketSink_7 extends _i1.SmartFake implements _i9.WebSocketSink {
         );
 }
 
-class _FakeStreamChannel_8<T> extends _i1.SmartFake
-    implements _i10.StreamChannel<T> {
-  _FakeStreamChannel_8(
+class _FakeWebSocketSink_8 extends _i1.SmartFake implements _i10.WebSocketSink {
+  _FakeWebSocketSink_8(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeStreamChannel_9<T> extends _i1.SmartFake
+    implements _i11.StreamChannel<T> {
+  _FakeStreamChannel_9(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -147,7 +160,7 @@ class _FakeStreamChannel_8<T> extends _i1.SmartFake
 /// A class which mocks [LocalStorage].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockLocalStorage extends _i1.Mock implements _i11.LocalStorage {
+class MockLocalStorage extends _i1.Mock implements _i12.LocalStorage {
   MockLocalStorage() {
     _i1.throwOnMissingStub(this);
   }
@@ -226,39 +239,39 @@ class MockLocalStorage extends _i1.Mock implements _i11.LocalStorage {
       );
 
   @override
-  _i12.Future<void> clear({bool? clearChatwootUserStorage = true}) =>
+  _i13.Future<void> clear({bool? clearChatwootUserStorage = true}) =>
       (super.noSuchMethod(
         Invocation.method(
           #clear,
           [],
           {#clearChatwootUserStorage: clearChatwootUserStorage},
         ),
-        returnValue: _i12.Future<void>.value(),
-        returnValueForMissingStub: _i12.Future<void>.value(),
-      ) as _i12.Future<void>);
+        returnValue: _i13.Future<void>.value(),
+        returnValueForMissingStub: _i13.Future<void>.value(),
+      ) as _i13.Future<void>);
 
   @override
-  _i12.Future<void> clearAll() => (super.noSuchMethod(
+  _i13.Future<void> clearAll() => (super.noSuchMethod(
         Invocation.method(
           #clearAll,
           [],
         ),
-        returnValue: _i12.Future<void>.value(),
-        returnValueForMissingStub: _i12.Future<void>.value(),
-      ) as _i12.Future<void>);
+        returnValue: _i13.Future<void>.value(),
+        returnValueForMissingStub: _i13.Future<void>.value(),
+      ) as _i13.Future<void>);
 }
 
 /// A class which mocks [ChatwootClientService].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockChatwootClientService extends _i1.Mock
-    implements _i13.ChatwootClientService {
+    implements _i14.ChatwootClientService {
   MockChatwootClientService() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  set connection(_i9.WebSocketChannel? _connection) => super.noSuchMethod(
+  set connection(_i10.WebSocketChannel? _connection) => super.noSuchMethod(
         Invocation.setter(
           #connection,
           _connection,
@@ -267,51 +280,51 @@ class MockChatwootClientService extends _i1.Mock
       );
 
   @override
-  _i12.Future<_i6.ChatwootContact> updateContact(dynamic update) =>
+  _i13.Future<_i6.ChatwootContact> updateContact(dynamic update) =>
       (super.noSuchMethod(
         Invocation.method(
           #updateContact,
           [update],
         ),
         returnValue:
-            _i12.Future<_i6.ChatwootContact>.value(_FakeChatwootContact_4(
+            _i13.Future<_i6.ChatwootContact>.value(_FakeChatwootContact_4(
           this,
           Invocation.method(
             #updateContact,
             [update],
           ),
         )),
-      ) as _i12.Future<_i6.ChatwootContact>);
+      ) as _i13.Future<_i6.ChatwootContact>);
 
   @override
-  _i12.Future<_i6.ChatwootContact> getContact() => (super.noSuchMethod(
+  _i13.Future<_i6.ChatwootContact> getContact() => (super.noSuchMethod(
         Invocation.method(
           #getContact,
           [],
         ),
         returnValue:
-            _i12.Future<_i6.ChatwootContact>.value(_FakeChatwootContact_4(
+            _i13.Future<_i6.ChatwootContact>.value(_FakeChatwootContact_4(
           this,
           Invocation.method(
             #getContact,
             [],
           ),
         )),
-      ) as _i12.Future<_i6.ChatwootContact>);
+      ) as _i13.Future<_i6.ChatwootContact>);
 
   @override
-  _i12.Future<List<_i14.ChatwootConversation>> getConversations() =>
+  _i13.Future<List<_i9.ChatwootConversation>> getConversations() =>
       (super.noSuchMethod(
         Invocation.method(
           #getConversations,
           [],
         ),
-        returnValue: _i12.Future<List<_i14.ChatwootConversation>>.value(
-            <_i14.ChatwootConversation>[]),
-      ) as _i12.Future<List<_i14.ChatwootConversation>>);
+        returnValue: _i13.Future<List<_i9.ChatwootConversation>>.value(
+            <_i9.ChatwootConversation>[]),
+      ) as _i13.Future<List<_i9.ChatwootConversation>>);
 
   @override
-  _i12.Future<_i7.ChatwootMessage> createMessage(
+  _i13.Future<_i7.ChatwootMessage> createMessage(
           _i15.ChatwootNewMessageRequest? request) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -319,17 +332,17 @@ class MockChatwootClientService extends _i1.Mock
           [request],
         ),
         returnValue:
-            _i12.Future<_i7.ChatwootMessage>.value(_FakeChatwootMessage_5(
+            _i13.Future<_i7.ChatwootMessage>.value(_FakeChatwootMessage_5(
           this,
           Invocation.method(
             #createMessage,
             [request],
           ),
         )),
-      ) as _i12.Future<_i7.ChatwootMessage>);
+      ) as _i13.Future<_i7.ChatwootMessage>);
 
   @override
-  _i12.Future<_i7.ChatwootMessage> updateMessage(
+  _i13.Future<_i7.ChatwootMessage> updateMessage(
     String? messageIdentifier,
     dynamic update,
   ) =>
@@ -342,7 +355,7 @@ class MockChatwootClientService extends _i1.Mock
           ],
         ),
         returnValue:
-            _i12.Future<_i7.ChatwootMessage>.value(_FakeChatwootMessage_5(
+            _i13.Future<_i7.ChatwootMessage>.value(_FakeChatwootMessage_5(
           this,
           Invocation.method(
             #updateMessage,
@@ -352,10 +365,10 @@ class MockChatwootClientService extends _i1.Mock
             ],
           ),
         )),
-      ) as _i12.Future<_i7.ChatwootMessage>);
+      ) as _i13.Future<_i7.ChatwootMessage>);
 
   @override
-  _i12.Future<_i8.CsatSurveyFeedbackResponse> sendCsatFeedBack(
+  _i13.Future<_i8.CsatSurveyFeedbackResponse> sendCsatFeedBack(
     String? conversationUuid,
     _i16.SendCsatSurveyRequest? request,
   ) =>
@@ -367,7 +380,7 @@ class MockChatwootClientService extends _i1.Mock
             request,
           ],
         ),
-        returnValue: _i12.Future<_i8.CsatSurveyFeedbackResponse>.value(
+        returnValue: _i13.Future<_i8.CsatSurveyFeedbackResponse>.value(
             _FakeCsatSurveyFeedbackResponse_6(
           this,
           Invocation.method(
@@ -378,34 +391,34 @@ class MockChatwootClientService extends _i1.Mock
             ],
           ),
         )),
-      ) as _i12.Future<_i8.CsatSurveyFeedbackResponse>);
+      ) as _i13.Future<_i8.CsatSurveyFeedbackResponse>);
 
   @override
-  _i12.Future<_i8.CsatSurveyFeedbackResponse?> getCsatFeedback(
+  _i13.Future<_i8.CsatSurveyFeedbackResponse?> getCsatFeedback(
           String? conversationUuid) =>
       (super.noSuchMethod(
         Invocation.method(
           #getCsatFeedback,
           [conversationUuid],
         ),
-        returnValue: _i12.Future<_i8.CsatSurveyFeedbackResponse?>.value(),
-      ) as _i12.Future<_i8.CsatSurveyFeedbackResponse?>);
+        returnValue: _i13.Future<_i8.CsatSurveyFeedbackResponse?>.value(),
+      ) as _i13.Future<_i8.CsatSurveyFeedbackResponse?>);
 
   @override
-  _i12.Future<List<_i7.ChatwootMessage>> getAllMessages() =>
+  _i13.Future<List<_i7.ChatwootMessage>> getAllMessages() =>
       (super.noSuchMethod(
         Invocation.method(
           #getAllMessages,
           [],
         ),
-        returnValue: _i12.Future<List<_i7.ChatwootMessage>>.value(
+        returnValue: _i13.Future<List<_i7.ChatwootMessage>>.value(
             <_i7.ChatwootMessage>[]),
-      ) as _i12.Future<List<_i7.ChatwootMessage>>);
+      ) as _i13.Future<List<_i7.ChatwootMessage>>);
 
   @override
   void startWebSocketConnection(
     String? contactPubsubToken, {
-    _i9.WebSocketChannel Function(Uri)? onStartConnection,
+    _i10.WebSocketChannel Function(Uri)? onStartConnection,
   }) =>
       super.noSuchMethod(
         Invocation.method(
@@ -431,12 +444,96 @@ class MockChatwootClientService extends _i1.Mock
         ),
         returnValueForMissingStub: null,
       );
+
+  @override
+  _i13.Future<_i9.ChatwootConversation> createConversation(
+          _i18.ChatwootConversationRequest? request) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #createConversation,
+          [request],
+        ),
+        returnValue: _i13.Future<_i9.ChatwootConversation>.value(
+            _FakeChatwootConversation_7(
+          this,
+          Invocation.method(
+            #createConversation,
+            [request],
+          ),
+        )),
+      ) as _i13.Future<_i9.ChatwootConversation>);
+
+  @override
+  _i13.Future<_i9.ChatwootConversation> updateConversation(
+    String? conversationId,
+    _i18.ChatwootConversationRequest? request,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateConversation,
+          [
+            conversationId,
+            request,
+          ],
+        ),
+        returnValue: _i13.Future<_i9.ChatwootConversation>.value(
+            _FakeChatwootConversation_7(
+          this,
+          Invocation.method(
+            #updateConversation,
+            [
+              conversationId,
+              request,
+            ],
+          ),
+        )),
+      ) as _i13.Future<_i9.ChatwootConversation>);
+
+  @override
+  _i13.Future<_i9.ChatwootConversation> getConversation(
+          String? conversationId) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getConversation,
+          [conversationId],
+        ),
+        returnValue: _i13.Future<_i9.ChatwootConversation>.value(
+            _FakeChatwootConversation_7(
+          this,
+          Invocation.method(
+            #getConversation,
+            [conversationId],
+          ),
+        )),
+      ) as _i13.Future<_i9.ChatwootConversation>);
+
+  @override
+  _i13.Future<void> deleteConversation(String? conversationId) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #deleteConversation,
+          [conversationId],
+        ),
+        returnValue: _i13.Future<void>.value(),
+        returnValueForMissingStub: _i13.Future<void>.value(),
+      ) as _i13.Future<void>);
+
+  @override
+  _i13.Future<Map<String, dynamic>> getConversationMeta() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getConversationMeta,
+          [],
+        ),
+        returnValue:
+            _i13.Future<Map<String, dynamic>>.value(<String, dynamic>{}),
+      ) as _i13.Future<Map<String, dynamic>>);
 }
 
 /// A class which mocks [ChatwootCallbacks].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockChatwootCallbacks extends _i1.Mock implements _i18.ChatwootCallbacks {
+class MockChatwootCallbacks extends _i1.Mock implements _i19.ChatwootCallbacks {
   MockChatwootCallbacks() {
     _i1.throwOnMissingStub(this);
   }
@@ -606,7 +703,7 @@ class MockChatwootCallbacks extends _i1.Mock implements _i18.ChatwootCallbacks {
       );
 
   @override
-  set onError(void Function(_i19.ChatwootClientException)? _onError) =>
+  set onError(void Function(_i20.ChatwootClientException)? _onError) =>
       super.noSuchMethod(
         Invocation.setter(
           #onError,
@@ -619,34 +716,34 @@ class MockChatwootCallbacks extends _i1.Mock implements _i18.ChatwootCallbacks {
 /// A class which mocks [WebSocketChannel].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockWebSocketChannel extends _i1.Mock implements _i9.WebSocketChannel {
+class MockWebSocketChannel extends _i1.Mock implements _i10.WebSocketChannel {
   MockWebSocketChannel() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i12.Future<void> get ready => (super.noSuchMethod(
+  _i13.Future<void> get ready => (super.noSuchMethod(
         Invocation.getter(#ready),
-        returnValue: _i12.Future<void>.value(),
-      ) as _i12.Future<void>);
+        returnValue: _i13.Future<void>.value(),
+      ) as _i13.Future<void>);
 
   @override
-  _i9.WebSocketSink get sink => (super.noSuchMethod(
+  _i10.WebSocketSink get sink => (super.noSuchMethod(
         Invocation.getter(#sink),
-        returnValue: _FakeWebSocketSink_7(
+        returnValue: _FakeWebSocketSink_8(
           this,
           Invocation.getter(#sink),
         ),
-      ) as _i9.WebSocketSink);
+      ) as _i10.WebSocketSink);
 
   @override
-  _i12.Stream<dynamic> get stream => (super.noSuchMethod(
+  _i13.Stream<dynamic> get stream => (super.noSuchMethod(
         Invocation.getter(#stream),
-        returnValue: _i12.Stream<dynamic>.empty(),
-      ) as _i12.Stream<dynamic>);
+        returnValue: _i13.Stream<dynamic>.empty(),
+      ) as _i13.Stream<dynamic>);
 
   @override
-  void pipe(_i10.StreamChannel<dynamic>? other) => super.noSuchMethod(
+  void pipe(_i11.StreamChannel<dynamic>? other) => super.noSuchMethod(
         Invocation.method(
           #pipe,
           [other],
@@ -655,103 +752,103 @@ class MockWebSocketChannel extends _i1.Mock implements _i9.WebSocketChannel {
       );
 
   @override
-  _i10.StreamChannel<S> transform<S>(
-          _i10.StreamChannelTransformer<S, dynamic>? transformer) =>
+  _i11.StreamChannel<S> transform<S>(
+          _i11.StreamChannelTransformer<S, dynamic>? transformer) =>
       (super.noSuchMethod(
         Invocation.method(
           #transform,
           [transformer],
         ),
-        returnValue: _FakeStreamChannel_8<S>(
+        returnValue: _FakeStreamChannel_9<S>(
           this,
           Invocation.method(
             #transform,
             [transformer],
           ),
         ),
-      ) as _i10.StreamChannel<S>);
+      ) as _i11.StreamChannel<S>);
 
   @override
-  _i10.StreamChannel<dynamic> transformStream(
-          _i12.StreamTransformer<dynamic, dynamic>? transformer) =>
+  _i11.StreamChannel<dynamic> transformStream(
+          _i13.StreamTransformer<dynamic, dynamic>? transformer) =>
       (super.noSuchMethod(
         Invocation.method(
           #transformStream,
           [transformer],
         ),
-        returnValue: _FakeStreamChannel_8<dynamic>(
+        returnValue: _FakeStreamChannel_9<dynamic>(
           this,
           Invocation.method(
             #transformStream,
             [transformer],
           ),
         ),
-      ) as _i10.StreamChannel<dynamic>);
+      ) as _i11.StreamChannel<dynamic>);
 
   @override
-  _i10.StreamChannel<dynamic> transformSink(
-          _i20.StreamSinkTransformer<dynamic, dynamic>? transformer) =>
+  _i11.StreamChannel<dynamic> transformSink(
+          _i21.StreamSinkTransformer<dynamic, dynamic>? transformer) =>
       (super.noSuchMethod(
         Invocation.method(
           #transformSink,
           [transformer],
         ),
-        returnValue: _FakeStreamChannel_8<dynamic>(
+        returnValue: _FakeStreamChannel_9<dynamic>(
           this,
           Invocation.method(
             #transformSink,
             [transformer],
           ),
         ),
-      ) as _i10.StreamChannel<dynamic>);
+      ) as _i11.StreamChannel<dynamic>);
 
   @override
-  _i10.StreamChannel<dynamic> changeStream(
-          _i12.Stream<dynamic> Function(_i12.Stream<dynamic>)? change) =>
+  _i11.StreamChannel<dynamic> changeStream(
+          _i13.Stream<dynamic> Function(_i13.Stream<dynamic>)? change) =>
       (super.noSuchMethod(
         Invocation.method(
           #changeStream,
           [change],
         ),
-        returnValue: _FakeStreamChannel_8<dynamic>(
+        returnValue: _FakeStreamChannel_9<dynamic>(
           this,
           Invocation.method(
             #changeStream,
             [change],
           ),
         ),
-      ) as _i10.StreamChannel<dynamic>);
+      ) as _i11.StreamChannel<dynamic>);
 
   @override
-  _i10.StreamChannel<dynamic> changeSink(
-          _i12.StreamSink<dynamic> Function(_i12.StreamSink<dynamic>)?
+  _i11.StreamChannel<dynamic> changeSink(
+          _i13.StreamSink<dynamic> Function(_i13.StreamSink<dynamic>)?
               change) =>
       (super.noSuchMethod(
         Invocation.method(
           #changeSink,
           [change],
         ),
-        returnValue: _FakeStreamChannel_8<dynamic>(
+        returnValue: _FakeStreamChannel_9<dynamic>(
           this,
           Invocation.method(
             #changeSink,
             [change],
           ),
         ),
-      ) as _i10.StreamChannel<dynamic>);
+      ) as _i11.StreamChannel<dynamic>);
 
   @override
-  _i10.StreamChannel<S> cast<S>() => (super.noSuchMethod(
+  _i11.StreamChannel<S> cast<S>() => (super.noSuchMethod(
         Invocation.method(
           #cast,
           [],
         ),
-        returnValue: _FakeStreamChannel_8<S>(
+        returnValue: _FakeStreamChannel_9<S>(
           this,
           Invocation.method(
             #cast,
             [],
           ),
         ),
-      ) as _i10.StreamChannel<S>);
+      ) as _i11.StreamChannel<S>);
 }
